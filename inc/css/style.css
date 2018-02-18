@@ -1,0 +1,28 @@
+body{
+    padding-top : 70px;
+}
+
+.main {
+    min-height : 85vh;
+}
+
+footer.monfooter{
+    background: lightcoral;
+    height: 40px;
+    line-height: 40px;
+}
+
+#enregistrement{
+    display: block;
+   margin: 0 auto;
+
+}
+
+.card{
+ margin:5px;
+ max-width:100px;
+ height: 100px;
+ display:block;
+background: lightgrey;
+
+}
