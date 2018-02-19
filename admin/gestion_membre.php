@@ -1,6 +1,6 @@
 <?php
 
-// COUCOU
+// COUCOU WESH
 
 require_once('../inc/init.php');
 

@@ -3,39 +3,85 @@ require_once("inc/init.php");
 
 if ( $_POST ){
 
-    $photo_bdd='';
+    $photo_bdd1='';
+    $photo_bdd2='';
+    $photo_bdd3='';
+    $photo_bdd4='';
+    $photo_bdd5='';
 
     if ( !empty($_FILES['photo1']['name'])){
         $nom_photo = $_POST['id_categorie'].'-'.$_FILES['photo1']['name'];
-        $photo_bdd = '/php/annonceo/inc/photo/'.$nom_photo;
-        $photo_dossier= $_SERVER['DOCUMENT_ROOT'].$photo_bdd;
+        $photo_bdd1 = '/php/annonceo/inc/photo/'.$nom_photo;
+        $photo_dossier= $_SERVER['DOCUMENT_ROOT'].$photo_bdd1;
 
         copy($_FILES['photo1']['tmp_name'], $photo_dossier);
     }
 
+    if ( !empty($_FILES['photo2']['name'])){
+        $nom_photo = $_POST['id_categorie'].'-'.$_FILES['photo2']['name'];
+        $photo_bdd2 = '/php/annonceo/inc/photo/'.$nom_photo;
+        $photo_dossier= $_SERVER['DOCUMENT_ROOT'].$photo_bdd2;
 
-    $result = $pdo->prepare("REPLACE INTO annonces VALUES (NULL,:titre,:description_courte,:description_longue,:prix,:photo,:ville,:adresse,:cp,:id_membre,:id_photo,:id_categorie, NOW())");
-    $result->execute(array( 'titre'                 => $_POST['titre'],   
+        copy($_FILES['photo2']['tmp_name'], $photo_dossier);
+    }
+
+    if ( !empty($_FILES['photo3']['name'])){
+        $nom_photo = $_POST['id_categorie'].'-'.$_FILES['photo3']['name'];
+        $photo_bdd3 = '/php/annonceo/inc/photo/'.$nom_photo;
+        $photo_dossier= $_SERVER['DOCUMENT_ROOT'].$photo_bdd3;
+
+        copy($_FILES['photo3']['tmp_name'], $photo_dossier);
+    }
+
+    if ( !empty($_FILES['photo4']['name'])){
+        $nom_photo = $_POST['id_categorie'].'-'.$_FILES['photo4']['name'];
+        $photo_bdd4 = '/php/annonceo/inc/photo/'.$nom_photo;
+        $photo_dossier= $_SERVER['DOCUMENT_ROOT'].$photo_bdd4;
+
+        copy($_FILES['photo4']['tmp_name'], $photo_dossier);
+    }
+
+    if ( !empty($_FILES['photo5']['name'])){
+        $nom_photo = $_POST['id_categorie'].'-'.$_FILES['photo5']['name'];
+        $photo_bdd5 = '/php/annonceo/inc/photo/'.$nom_photo;
+        $photo_dossier= $_SERVER['DOCUMENT_ROOT'].$photo_bdd5;
+
+        copy($_FILES['photo5']['tmp_name'], $photo_dossier);
+    }
+
+    $result1 = $pdo->prepare("INSERT INTO photo VALUES (NULL,:photo1,:photo2,:photo3,:photo4,:photo5)");
+        $result1->execute(array(    'photo1' => $photo_bdd1,
+                                    'photo2' => $photo_bdd2,
+                                    'photo3' => $photo_bdd3,
+                                    'photo4' => $photo_bdd4,
+                                    'photo5' => $photo_bdd5
+                        ));
+
+    $assoc_photo = $pdo->lastInsertId();
+
+    $result = $pdo->prepare("INSERT INTO annonces VALUES (NULL,:titre,:description_courte,:description_longue,:prix,:photo,:ville,:adresse,:cp,:id_membre,:photo_id,:id_categorie, NOW())");
+    $result->execute(array( 'titre'                 => $_POST['titre'],
                             'description_courte'    => $_POST['description_courte'],       
                             'description_longue'    => $_POST['description_longue'],       
                             'prix'                  => $_POST['prix'],       
-                            'photo'                 => $photo_bdd,
+                            'photo'                 => $photo_bdd1,
                             'ville'                 => $_POST['ville'],       
                             'adresse'               => $_POST['adresse'],       
-                            'cp'                    => $_POST['cp'],       
-                            'id_membre'             => $_SESSION['id_membre'],       
-                            'id_photo'              => $_POST['id_photo'],       
+                            'cp'                    => $_POST['cp'],
+                            'photo_id'              => $assoc_photo,
+                            'id_membre'             => $_SESSION['membre']['id_membre'],          
                             'id_categorie'          => $_POST['id_categorie']
     ));
 
+    
 
-}
+
+};
 
 require_once("inc/haut-site.php");
 echo $contenu;
 
-// $result = $pdo->query("SELECT * FROM annonce");
-// $result->
+
 
 ?>
 
@@ -72,14 +118,7 @@ echo $contenu;
         </div>
 
         <?php
-$result1 = $pdo->prepare("REPLACE INTO photo VALUES (:id_photo,:photo1,:photo2,:photo3,:photo4,:photo5)");
-$result1->execute(array( 'id_photo' => ':id_photo',
-                        'photo1' => $_POST['photo1'],
-                        'photo2' => $_POST['photo2'],
-                        'photo3' => $_POST['photo3'],
-                        'photo4' => $_POST['photo4'],
-                        'photo5' => $_POST['photo5']
-                    ));
+
 
         ?>
 
