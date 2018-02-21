@@ -20,3 +20,7 @@ function estConnecteEtAdmin(){
         return false;
     }
 }
+
+function moyenneNote($notes,$nbnotes){
+    return $notes/$nbnotes;
+}

@@ -13,3 +13,6 @@ array(
 require_once('fonction.php');
 
 $contenu='';
+$contenu_gauche='';
+$contenu_droite='';
+$aside='';

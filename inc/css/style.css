@@ -1,9 +1,12 @@
 body{
     padding-top : 70px;
+    background-image: url('./bckgrnd/doodles.png');
 }
+
 
 .main {
     min-height : 85vh;
+    background: white;
 }
 
 footer.monfooter{
@@ -18,11 +21,53 @@ footer.monfooter{
 
 }
 
+.img-tab-princip{
+    width : 300px;
+}
+
+.modal-body button{
+    margin:10px;
+}
+
+table{
+    background: white;
+}
+
+th{
+    background: lightcoral;
+}
+
+tr, td, th{
+    padding : 5px 20px;
+}
+
+button{
+    margin: 10px;
+}
+
+.aside{
+    padding : 60px 40px;
+}
+
+.tabannonces{
+    margin-left : -360px !important;
+}
+
+
 .card{
  margin:5px;
  max-width:100px;
  height: 100px;
  display:block;
 background: lightgrey;
+}
 
+#info{
+    margin: 10px;
+    width: 100%;
+}
+
+#googleMap{
+    height: 250px;
+    width: 100%;
 }

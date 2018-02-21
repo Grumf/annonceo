@@ -9,6 +9,31 @@ if ( !estConnecteEtAdmin() ){
     exit();
 }
 
+// Changement
+if ( isset($_GET['action']) && $_GET['action'] == 'changestatut' && !empty($_GET['id_membre']) ){
+    if ( $_GET['id_membre'] != $_SESSION['membre']['id_membre']){
+        $resul = $pdo->prepare("SELECT statut FROM membre WHERE id_membre = :id_membre");
+        $resul->execute(array('id_membre'=>$_GET['id_membre']));
+        $membre = $resul->fetch(PDO::FETCH_ASSOC);
+        $newStatut = ($membre['statut']==0) ? 1 : 0;
+
+        $resul= $pdo->prepare("UPDATE membre SET statut= :newstatut WHERE id_membre= :id_membre");
+        $resul->execute(array('id_membre'=>$_GET['id_membre'],
+                              'newstatut'=>$newStatut));
+        $contenu.="<div class='alert alert-success'>Le statut du membre à été modifié</div>";
+    }
+}
+
+
+// Suppression
+if (isset($_GET['action']) && $_GET['action'] == 'suppression' && !empty($_GET['id_membre']) ){
+    if ( $_GET['id_membre'] != $_SESSION['membre']['id_membre'] ){
+        $resul = $pdo->prepare("DELETE FROM membre WHERE id_membre = :id_membre");
+        $resul->execute(array('id_membre' => $_GET['id_membre']));
+        $contenu.="<div class='alert alert-success'>Ce connard à été supprimé</div>";
+    }
+}
+
 $membres = $pdo->query("SELECT * FROM membre");
 
 $nbcolonnes = $membres->columnCount();

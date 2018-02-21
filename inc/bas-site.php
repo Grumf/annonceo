@@ -4,6 +4,7 @@
         </footer>
 
         <script src="inc/js/jquery-3.3.1.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
         <script src="inc/js/bootstrap.min.js"></script>
         
     </body>

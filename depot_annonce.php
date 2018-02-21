@@ -73,14 +73,14 @@ if ( $_POST ){
                             'id_categorie'          => $_POST['id_categorie']
     ));
 
+
+
     
 
 
 };
 
 require_once("inc/haut-site.php");
-echo $contenu;
-
 
 
 ?>
@@ -105,22 +105,23 @@ echo $contenu;
                 <label for="prix">Prix</label>
                 <input type="text" class="form-control" placeholder="euro(s)"  name="prix" id="prix" required>
             </div>
-            <div>
+
+<?php  
+
+$cat = $pdo->query("SELECT DISTINCT a.id_categorie, c.titre FROM annonces a, categorie c WHERE c.id_categorie = a.id_categorie");
+
+
+            echo '<div>
             <label for="id_categorie" >Catégorie</label>
-                <select class="form-control" name="id_categorie" id="id_categorie" required>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                </select>
+                <select class="form-control" name="id_categorie" id="id_categorie" required>';
+                while ($categorie = $cat->fetch(PDO::FETCH_ASSOC)){
+                    echo '<option value="'.$categorie['id_categorie'].'">'.$categorie['titre'].'</option>';
+                        }
+                echo '</select>
             </div>
-        </div>
+        </div>';
 
-        <?php
-
-
-        ?>
+?>
 
         <div class="form-group col-md-6">
             <div class="row">

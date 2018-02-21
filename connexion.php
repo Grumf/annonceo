@@ -2,6 +2,12 @@
 
 require_once('inc/init.php');
 
+if ( isset($_GET['action']) && $_GET['action'] ='deconnexion'){
+
+    session_destroy();
+    header('location:connexion.php');
+
+}
 
 if ( $_POST ){
     $motdepassecrypte = md5($_POST['mdp']); 
@@ -24,11 +30,7 @@ if ( $_POST ){
     }
 }
 
-if ( isset($_GET['action']) && $_GET['action'] ='deconnexion'){
 
-    session_destroy();
-
-}
 
 require_once('inc/haut-site.php');
 echo $contenu;
